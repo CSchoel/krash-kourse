@@ -1,4 +1,4 @@
-# Krash kourse
+# Krash Kourse
 
 This is a repository for getting your hands dirty with Kubernetes in less than an hour.
 
@@ -17,3 +17,7 @@ For the sake of simplicity, we're using a single-node Kubernetes cluster that yo
     NAME      STATUS   ROLES           AGE   VERSION
     valakas   Ready    control-plane   57d   v1.34.3+k3s1
     ```
+
+## Exercises
+
+To complete your Krash Kourse, work your way through the exercises in the `configs` folder, starting with [v0](configs/v0/README.md).
