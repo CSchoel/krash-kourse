@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
     - name: lt
-      image: meyay/languagetool:6.6-8
+      image: meyay/languagetool:6.7-7
       ports:
         - containerPort: 8081
       env:
