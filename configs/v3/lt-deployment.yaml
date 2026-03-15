@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lt-deployment
+  labels:
+    app: languagetool
+spec:
+  template:
+    metadata:
+      name: lt-pod
+      labels:
+        app: languagetool
+    spec:
+      containers:
+        - name: lt
+          image: erikvl87/languagetool:6.7-dockerupdate-3
+          ports:
+            - containerPort: 8010
+          volumeMounts:
+            - mountPath: /LanguageTool/lockback.xml
+              name: tmpfs-storage
+              subPath: lockback.xml
+      volumes:
+        - emptyDir:
+            medium: Memory
+            sizeLimit: 500Mi
+          name: tmpfs-storage
+  replicas: 3
+  selector:
+    matchLabels:
+      app: languagetool
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
