@@ -5,8 +5,8 @@ With the `ReplicaSet` introduced in [v1](../v1/README.md), this already becomes 
 _Which_ pod should we query?
 Would we just skip between multiple IPs, or do we have to deploy a loadbalancer?
 
-If we think about a production setup, we even have another more fundamental problem: All Kubernetes componens, including our LT pods, live in a virtual private network.
-The example in v0 only worked, because we happened to be on the same machine that hosts this virtual network.
+If we think about a production setup, we even have another more fundamental problem: All Kubernetes componens, including our LT pods, live in a private network.
+The example in v0 only worked, because we happened to be on the same machine that hosts this network.
 So how do we let users access the LT pod from outside the cluster?
 Or in other words, how do we make something like the following work:
 
@@ -35,7 +35,7 @@ curl 127.0.0.1:30080/v2/languages
 curl 127.0.0.1:30080/v2/languages
 curl 127.0.0.1:30080/v2/languages
 curl 127.0.0.1:30080/v2/languages
-kubetcl get logs -l app=languagetool --tail 5
+kubectl logs -l app=languagetool --tail 5 --all-pods=true | grep Handling
 ```
 
 _Note: You should see that the requests are distributed across the nodes._
