@@ -27,6 +27,18 @@ kubectl apply -f configs/v3/lt-deployment.yaml
 ## 2 Change the version and watch pod changes
 
 ```bash
-sed -i 's/6.7-dockerupdate-3/6.6-dockerupdate-2/' config/v3/lt-deployment.yaml
+sed -i 's/6.7-dockerupdate-3/6.6-dockerupdate-2/' configs/v3/lt-deployment.yaml
+kubectl apply -f configs/v3/lt-deployment.yaml && watch -n 1 kubectl get pods -l app=languagetool
+```
 
+## 3 Check the rollout history
+
+```bash
+kubectl rollout history deployment/lt-deployment 
+```
+
+## 3 Roll back to the previous version
+
+```bash
+kubectl rollout undo deployment/lt-deployment && watch -n 1 kubectl get pods -l app=languagetool
 ```
