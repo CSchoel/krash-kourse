@@ -1,5 +1,41 @@
 # Krash Kourse v2 - Using a service
 
+In [v0](../v0/README.md), we were able to use `curl` to query the LT server using the IP of the _Kubernetes pod_ that runs the service.
+With the `ReplicaSet` introduced in [v1](../v1/README.md), this already becomes unwieldy.
+_Which_ pod should we query?
+Would we just skip between multiple IPs, or do we have to deploy a loadbalancer?
+
+If we think about a production setup, we even have another more fundamental problem: All Kubernetes componens, including our LT pods, live in a virtual private network.
+The example in v0 only worked, because we happened to be on the same machine that hosts this virtual network.
+So how do we let users access the LT pod from outside the cluster?
+Or in other words, how do we make something like the following work:
+
+```bash
+curl 127.0.0.1:8081/v2/languages
+```
+
+The answer is a `Service`, specifically a `NodePort` service that acts as a per-node load-balancer for our LT pods.
+In a multi-node setup, you would want a `LoadBalancer` service instead (which only works in a managed Kubernetes cloud) or actually deploy a load-balancer like traefik yourself.
+
+## 1 Deploying a service
+
+```bash
+kubectl apply -f configs/v2/lt-service.yaml
+```
+
+## 2 Test access from outside the cluster
+
 ```bash
 curl 127.0.0.1:30080/v2/languages
 ```
+
+## 3 Check pod logs
+
+```bash
+curl 127.0.0.1:30080/v2/languages
+curl 127.0.0.1:30080/v2/languages
+curl 127.0.0.1:30080/v2/languages
+kubetcl get logs -l app=languagetool --tail 5
+```
+
+_Note: You should see that the requests are distributed across the nodes._
