@@ -11,7 +11,7 @@ So how do we let users access the LT pod from outside the cluster?
 Or in other words, how do we make something like the following work:
 
 ```bash
-curl 127.0.0.1:8081/v2/languages
+curl 127.0.0.1:8010/v2/languages
 ```
 
 The answer is a `Service`, specifically a `NodePort` service that acts as a per-node load-balancer for our LT pods.

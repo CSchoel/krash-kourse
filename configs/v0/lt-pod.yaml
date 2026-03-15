@@ -7,17 +7,13 @@ metadata:
 spec:
   containers:
     - name: lt
-      image: meyay/languagetool:6.7-7
+      image: erikvl87/languagetool:6.7-dockerupdate-3
       ports:
-        - containerPort: 8081
-      env:
-        - name: MAP_UID
-          value: "783"
-        - name: MAP_GID
-          value: "783"
+        - containerPort: 8010
       volumeMounts:
-        - mountPath: /tmp
+        - mountPath: /LanguageTool/lockback.xml
           name: tmpfs-storage
+          subPath: lockback.xml
   volumes:
     - emptyDir:
         medium: Memory
