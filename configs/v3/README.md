@@ -20,7 +20,9 @@ The solution is a `Deployment`, which watches image versions and other changes a
 ## 1 Create a Deployment
 
 ```bash
-kubectl delete -f configs/v3/lt-replicaset.yaml # delete ReplicaSet if needed
+# Delete old ReplicaSet
+kubectl delete -f configs/v3/lt-replicaset.yaml
+# Create new Deployment
 kubectl apply -f configs/v3/lt-deployment.yaml
 ```
 
@@ -37,7 +39,7 @@ kubectl apply -f configs/v3/lt-deployment.yaml && watch -n 1 kubectl get pods -l
 kubectl rollout history deployment/lt-deployment 
 ```
 
-## 3 Roll back to the previous version
+## 4 Roll back to the previous version
 
 ```bash
 kubectl rollout undo deployment/lt-deployment && watch -n 1 kubectl get pods -l app=languagetool

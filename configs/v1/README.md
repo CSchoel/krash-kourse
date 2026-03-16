@@ -17,12 +17,14 @@ kubectl get pods
 ## 3 Scale number of pods (imperative)
 
 ```bash
-kubectl scale lt-replicaset --replicas=2
+kubectl scale replicaset lt-replicaset --replicas=2
 ```
 
 ## 4 Scale number of pods (declarative)
 
 ```bash
+# Increase number of replicas to 4 in lt-replicaset.yaml
 sed -Ei 's/replicas: [0-9]+/replicas: 4/' configs/v1/lt-replicaset.yaml
+# Apply update
 kubectl apply -f configs/v1/lt-replicaset.yaml
 ```

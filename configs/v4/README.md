@@ -18,7 +18,7 @@ curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-4 | bash
 _TODO: I want to make this nicer by creating a proper [chart repository](https://helm.sh/docs/topics/chart_repository/) in the future._
 
 ```bash
-# delete previous deployments if necessary
+# Delete previous deployments
 kubectl delete deployment lt-deployment
 kubectl delete service lt-service
 # Get the helm chart

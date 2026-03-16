@@ -31,7 +31,7 @@ While you're waiting, let's try some CLI args to add to the above command:
 ## 3 Access the deployed service
 
 ```bash
-LT_POD_IP=$(kubectl get pods -l app=languagetool --no-headers -o wide | awk '{print $6}')
+LT_POD_IP=$(kubectl get pods -l app=languagetool -o=jsonpath='{.items[0].status.podIP}')
 curl $LT_POD_IP:8010/v2/languages
 curl $LT_POD_IP:8010/v2/check -d text="Its fine." -d language=en
 ```

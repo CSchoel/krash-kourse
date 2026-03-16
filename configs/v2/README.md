@@ -38,4 +38,4 @@ curl 127.0.0.1:30080/v2/languages
 kubectl logs -l app=languagetool --tail 5 --all-pods=true | grep Handling
 ```
 
-_Note: You should see that the requests are distributed across the nodes._
+_Note: You should see that the requests are distributed across the pods._
