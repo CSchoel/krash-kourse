@@ -33,7 +33,7 @@ While you're waiting, let's try some CLI args to add to the above command:
 ```bash
 LT_POD_IP=$(kubectl get pods -l app=languagetool -o=jsonpath='{.items[0].status.podIP}')
 curl $LT_POD_IP:8010/v2/languages
-curl $LT_POD_IP:8010/v2/check -d text="Its fine." -d language=en
+curl $LT_POD_IP:8010/v2/check -d text="Its fine." -d language=en-US
 ```
 
 ## 4 Cleanup

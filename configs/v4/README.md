@@ -34,5 +34,5 @@ helm install lt charts/languagetool
 
 ```bash
 kubectl get all -l app.kubernetes.io/name=languagetool
-curl http://127.0.0.1:30080/v2/check -d text="Its fine." -d language=en
+curl http://127.0.0.1:30080/v2/check -d text="Its fine." -d language=en-US
 ```
