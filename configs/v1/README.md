@@ -8,10 +8,24 @@ Kubernetes is all about automation and scalability, so instead of deploying a po
 kubectl apply -f configs/v1/lt-replicaset.yaml
 ```
 
+Expected output:
+```plain
+replicaset.apps/lt-replicaset created
+```
+
 ## 2 Observe pods
 
 ```bash
 kubectl get pods
+```
+
+Expected output:
+
+```plain
+NAME                  READY   STATUS    RESTARTS   AGE
+lt-replicaset-nl4j4   1/1     Running   0          36s
+lt-replicaset-qgb6l   1/1     Running   0          36s
+lt-replicaset-qhs95   1/1     Running   0          36s
 ```
 
 ## 3 Scale number of pods (imperative)
@@ -20,11 +34,23 @@ kubectl get pods
 kubectl scale replicaset lt-replicaset --replicas=2
 ```
 
+Expected output:
+
+```plain
+replicaset.apps/lt-replicaset scaled
+```
+
 ## 4 Scale number of pods (declarative)
 
 ```bash
-# Increase number of replicas to 4 in lt-replicaset.yaml
+# Change "replicas: X" to "replicas: 4" in lt-replicaset.yaml
 sed -Ei 's/replicas: [0-9]+/replicas: 4/' configs/v1/lt-replicaset.yaml
 # Apply update
 kubectl apply -f configs/v1/lt-replicaset.yaml
+```
+
+Expected output:
+
+```plain
+replicaset.apps/lt-replicaset configured
 ```

@@ -24,7 +24,7 @@ spec:
             medium: Memory
             sizeLimit: 500Mi
           name: tmpfs-storage
-  replicas: 3
+  replicas: 4
   selector:
     matchLabels:
       app: languagetool

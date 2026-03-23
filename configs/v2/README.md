@@ -11,6 +11,7 @@ So how do we let users access the LT pod from outside the cluster?
 Or in other words, how do we make something like the following work:
 
 ```bash
+# This won't work yet!
 curl 127.0.0.1:8010/v2/languages
 ```
 
@@ -23,10 +24,22 @@ In a multi-node setup, you would want a `LoadBalancer` service instead (which on
 kubectl apply -f configs/v2/lt-service.yaml
 ```
 
+Expected output:
+
+```plain
+service/lt-service created
+```
+
 ## 2 Test access from outside the cluster
 
 ```bash
 curl 127.0.0.1:30080/v2/languages
+```
+
+Expected output:
+
+```plain
+[{"name":"Arabic", ... }]
 ```
 
 ## 3 Check pod logs
@@ -38,4 +51,13 @@ curl 127.0.0.1:30080/v2/languages
 kubectl logs -l app=languagetool --tail 5 --all-pods=true | grep Handling
 ```
 
-_Note: You should see that the requests are distributed across the pods._
+Expected output:
+
+```plain
+[pod/lt-replicaset-nl4j4/lt] 2026-03-23 16:36:30.960 GMT INFO  org.languagetool.server.LanguageToolHttpHandler Handling GET /v2/languages
+[pod/lt-replicaset-qhs95/lt] 2026-03-23 16:36:29.244 GMT INFO  org.languagetool.server.LanguageToolHttpHandler Handling GET /v2/languages
+[pod/lt-replicaset-qhs95/lt] 2026-03-23 16:36:29.961 GMT INFO  org.languagetool.server.LanguageToolHttpHandler Handling GET /v2/languages
+[pod/lt-replicaset-xph5s/lt] 2026-03-23 16:36:30.473 GMT INFO  org.languagetool.server.LanguageToolHttpHandler Handling GET /v2/languages
+```
+
+_Note: You should see that the requests are distributed evenly across the pods._
