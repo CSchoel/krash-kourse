@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: lt
-          image: erikvl87/languagetool:6.6-dockerupdate-2
+          image: erikvl87/languagetool:6.7-dockerupdate-3
           ports:
             - containerPort: 8010
           volumeMounts:
