@@ -44,6 +44,9 @@ Expected output:
 
 ## 3 Check pod logs
 
+_Note: This uses `grep`. As a Windows user, it's recommended to run this on the WSL, but you can also omit the part of the command after the pipe (`|`) and just look for the lines containing "Handling".
+The logs shouldn't be very long._
+
 ```bash
 curl 127.0.0.1:30080/v2/languages
 curl 127.0.0.1:30080/v2/languages
