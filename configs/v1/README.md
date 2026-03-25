@@ -8,10 +8,11 @@ Kubernetes is all about automation and scalability, so instead of deploying a po
 kubectl apply -f configs/v1/lt-replicaset.yaml
 ```
 
-Expected output:
-```plain
-replicaset.apps/lt-replicaset created
-```
+> Expected output:
+>
+> ```plain
+> replicaset.apps/lt-replicaset created
+> ```
 
 ## 2 Observe pods
 
@@ -19,14 +20,14 @@ replicaset.apps/lt-replicaset created
 kubectl get pods
 ```
 
-Expected output:
-
-```plain
-NAME                  READY   STATUS    RESTARTS   AGE
-lt-replicaset-nl4j4   1/1     Running   0          36s
-lt-replicaset-qgb6l   1/1     Running   0          36s
-lt-replicaset-qhs95   1/1     Running   0          36s
-```
+> Expected output:
+>
+> ```plain
+> NAME                  READY   STATUS    RESTARTS   AGE
+> lt-replicaset-nl4j4   1/1     Running   0          36s
+> lt-replicaset-qgb6l   1/1     Running   0          36s
+> lt-replicaset-qhs95   1/1     Running   0          36s
+> ```
 
 ## 3 Scale number of pods (imperative)
 
@@ -34,11 +35,11 @@ lt-replicaset-qhs95   1/1     Running   0          36s
 kubectl scale replicaset lt-replicaset --replicas=2
 ```
 
-Expected output:
-
-```plain
-replicaset.apps/lt-replicaset scaled
-```
+> Expected output:
+>
+> ```plain
+> replicaset.apps/lt-replicaset scaled
+> ```
 
 ## 4 Scale number of pods (declarative)
 
@@ -49,8 +50,8 @@ sed -Ei 's/replicas: [0-9]+/replicas: 4/' configs/v1/lt-replicaset.yaml
 kubectl apply -f configs/v1/lt-replicaset.yaml
 ```
 
-Expected output:
-
-```plain
-replicaset.apps/lt-replicaset configured
-```
+> Expected output:
+>
+> ```plain
+> replicaset.apps/lt-replicaset configured
+> ```

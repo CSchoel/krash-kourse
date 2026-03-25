@@ -48,21 +48,21 @@ Run the following commands _in the main folder of your working copy of the brood
 helm install --dry-run=client lt charts/languagetool
 ```
 
-Expected output (abbreviated):
-
-```plain
-NAME: lt
-LAST DEPLOYED: Mon Mar 23 18:02:02 2026
-NAMESPACE: default
-STATUS: pending-install
-REVISION: 1
-DESCRIPTION: Dry run complete
-HOOKS:
----
-# Source: languagetool/templates/tests/test-connection.yaml
-apiVersion: v1
-...
-```
+> Expected output (abbreviated):
+>
+> ```plain
+> NAME: lt
+> LAST DEPLOYED: Mon Mar 23 18:02:02 2026
+> NAMESPACE: default
+> STATUS: pending-install
+> REVISION: 1
+> DESCRIPTION: Dry run complete
+> HOOKS:
+> ---
+> # Source: languagetool/templates/tests/test-connection.yaml
+> apiVersion: v1
+> ...
+> ```
 
 ## 5 Install the Helm chart
 
@@ -70,21 +70,21 @@ apiVersion: v1
 helm install lt charts/languagetool
 ```
 
-Expected output:
-
-```plain
-NAME: lt
-LAST DEPLOYED: Mon Mar 23 18:05:46 2026
-NAMESPACE: default
-STATUS: deployed
-REVISION: 1
-DESCRIPTION: Install complete
-NOTES:
-1. Get the application URL by running these commands:
-  export NODE_PORT=$(kubectl get --namespace default -o jsonpath="{.spec.ports[0].nodePort}" services lt-languagetool)
-  export NODE_IP=$(kubectl get nodes --namespace default -o jsonpath="{.items[0].status.addresses[0].address}")
-  echo http://$NODE_IP:$NODE_PORT
-```
+> Expected output:
+>
+> ```plain
+> NAME: lt
+> LAST DEPLOYED: Mon Mar 23 18:05:46 2026
+> NAMESPACE: default
+> STATUS: deployed
+> REVISION: 1
+> DESCRIPTION: Install complete
+> NOTES:
+> 1. Get the application URL by running these commands:
+>   export NODE_PORT=$(kubectl get --namespace default -o jsonpath="{.spec.ports[0].nodePort}" services lt-languagetool)
+>   export NODE_IP=$(kubectl get nodes --namespace default -o jsonpath="{.items[0].status.addresses[0].address}")
+>   echo http://$NODE_IP:$NODE_PORT
+> ```
 
 
 ## 6 Inspect and test the resulting deployment
@@ -93,21 +93,21 @@ NOTES:
 kubectl get all -l app.kubernetes.io/name=languagetool
 ```
 
-Expected output:
-
-```plain
-NAME                                   READY   STATUS    RESTARTS   AGE
-pod/lt-languagetool-6f95975898-tbrz4   1/1     Running   0          2m6s
-
-NAME                      TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
-service/lt-languagetool   NodePort   10.43.196.34   <none>        8010:30080/TCP   2m6s
-
-NAME                              READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/lt-languagetool   1/1     1            1           2m6s
-
-NAME                                         DESIRED   CURRENT   READY   AGE
-replicaset.apps/lt-languagetool-6f95975898   1         1         1       2m6s
-```
+> Expected output:
+>
+> ```plain
+> NAME                                   READY   STATUS    RESTARTS   AGE
+> pod/lt-languagetool-6f95975898-tbrz4   1/1     Running   0          2m6s
+>
+> NAME                      TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
+> service/lt-languagetool   NodePort   10.43.196.34   <none>        8010:30080/TCP   2m6s
+>
+> NAME                              READY   UP-TO-DATE   AVAILABLE   AGE
+> deployment.apps/lt-languagetool   1/1     1            1           2m6s
+>
+> NAME                                         DESIRED   CURRENT   READY   AGE
+> replicaset.apps/lt-languagetool-6f95975898   1         1         1       2m6s
+> ```
 
 ## 7 Test the deployment
 
@@ -115,11 +115,11 @@ replicaset.apps/lt-languagetool-6f95975898   1         1         1       2m6s
 curl http://127.0.0.1:30080/v2/check -d text="Its fine." -d language=en-US
 ```
 
-Expected output (abbreviated):
-
-```plain
-{"software":{"name":"LanguageTool","version":"6.7" ... }
-```
+> Expected output (abbreviated):
+>
+> ```plain
+> {"software":{"name":"LanguageTool","version":"6.7" ... }
+> ```
 
 ## 8 Cleanup
 

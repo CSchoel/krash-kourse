@@ -11,11 +11,11 @@ You can also create objects with imperative commands like `kubectl create pod`, 
 kubectl apply -f configs/v0/lt-pod.yaml
 ```
 
-Expected output:
-
-```plain
-pod/lt-pod created
-```
+> Expected output:
+>
+> ```plain
+> pod/lt-pod created
+> ```
 
 ## 2 Inspect the pod
 
@@ -26,12 +26,12 @@ It might take a few seconds until it's ready.
 kubectl get pods
 ```
 
-Expected output:
-
-```plain
-NAME     READY   STATUS    RESTARTS   AGE
-lt-pod   1/1     Running   0          43s
-```
+> Expected output:
+>
+> ```plain
+> NAME     READY   STATUS    RESTARTS   AGE
+> lt-pod   1/1     Running   0          43s
+> ```
 
 While you're waiting, let's try some CLI args to add to the above command:
 
@@ -58,11 +58,12 @@ kubectl run -itq --restart=Never --rm --image curlimages/curl curl -- $LT_POD_IP
 kubectl run -itq --restart=Never --rm --image curlimages/curl curl -- $LT_POD_IP:8010/v2/check -d text="Its fine." -d language=en-US
 ```
 
-Expected output (abbreviated):
-```plain
-[{"name":"Arabic", ... }]
-{"software":{"name":"LanguageTool", ... }
-```
+> Expected output (abbreviated):
+>
+> ```plain
+> [{"name":"Arabic", ... }]
+> {"software":{"name":"LanguageTool", ... }
+> ```
 
 ## 4 Cleanup
 

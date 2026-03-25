@@ -11,13 +11,13 @@ kubectl apply -f configs/v3/lt-replicaset.yaml
 kubectl get pods -l app=languagetool -o=jsonpath="{.items[*].spec.containers[0].image}{'\n'}"
 ```
 
-Expected output:
-
-```plain
-erikvl87/languagetool:6.7-dockerupdate-3 erikvl87/languagetool:6.7-dockerupdate-3 erikvl87/languagetool:6.7-dockerupdate-3
-replicaset.apps/lt-replicaset configured
-erikvl87/languagetool:6.7-dockerupdate-3 erikvl87/languagetool:6.7-dockerupdate-3 erikvl87/languagetool:6.7-dockerupdate-3
-```
+> Expected output:
+>
+> ```plain
+> erikvl87/languagetool:6.7-dockerupdate-3 erikvl87/languagetool:6.7-dockerupdate-3 erikvl87/languagetool:6.7-dockerupdate-3
+> replicaset.apps/lt-replicaset configured
+> erikvl87/languagetool:6.7-dockerupdate-3 erikvl87/languagetool:6.7-dockerupdate-3 erikvl87/languagetool:6.7-dockerupdate-3
+> ```
 
 In fact, the image version of the pods remains unaffected by the change to the `ReplicaSet`.
 To make the changes take effect, we have to delete the pods first, using `kubectl delete pod name-of-pod`.
@@ -34,12 +34,12 @@ kubectl delete -f configs/v3/lt-replicaset.yaml
 kubectl apply -f configs/v3/lt-deployment.yaml
 ```
 
-Expected output:
-
-```plain
-replicaset.apps "lt-replicaset" deleted from default namespace
-deployment.apps/lt-deployment created
-```
+> Expected output:
+>
+> ```plain
+> replicaset.apps "lt-replicaset" deleted from default namespace
+> deployment.apps/lt-deployment created
+> ```
 
 ## 2 Change the version and watch pod changes
 
@@ -53,10 +53,10 @@ sed -i 's/6.7-dockerupdate-3/6.6-dockerupdate-2/' configs/v3/lt-deployment.yaml
 kubectl apply -f configs/v3/lt-deployment.yaml && watch -n 1 kubectl get pods -l app=languagetool
 ```
 
-Expected output:
-
-* You should see some pods being deleted and new ones being created.
-* There should always be at least one pod that remains running.
+> Expected output:
+>
+> * You should see some pods being deleted and new ones being created.
+> * There should always be at least one pod that remains running.
 
 ## 3 Check the rollout history
 
@@ -64,14 +64,14 @@ Expected output:
 kubectl rollout history deployment/lt-deployment 
 ```
 
-Expected output:
-
-```plain
-deployment.apps/lt-deployment
-REVISION  CHANGE-CAUSE
-1         <none>
-2         <none>
-```
+> Expected output:
+>
+> ```plain
+> deployment.apps/lt-deployment
+> REVISION  CHANGE-CAUSE
+> 1         <none>
+> 2         <none>
+> ```
 
 Note: The `CHANGE-CAUSE` can be set as an annotation in the deployment yaml file or (if you use imperative commands instead of `apply`) via an argument to `kubectl`.
 
@@ -81,7 +81,7 @@ Note: The `CHANGE-CAUSE` can be set as an annotation in the deployment yaml file
 kubectl rollout undo deployment/lt-deployment && watch -n 1 kubectl get pods -l app=languagetool
 ```
 
-Expected output:
-
-* You should see some pods being deleted and new ones being created.
-* There should always be at least one pod that remains running.
+> Expected output:
+>
+> * You should see some pods being deleted and new ones being created.
+> * There should always be at least one pod that remains running.
