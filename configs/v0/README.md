@@ -52,12 +52,10 @@ On Windows, it's recommended to use the WSL to run the below command, but you ca
 ```bash
 # Find the IP of the pod that runs LT.
 LT_POD_IP=$(kubectl get pods -l app=languagetool -o=jsonpath='{.items[0].status.podIP}')
-# Save kubectl command that we need to spawn a pod for running curl.
-KURL="kubectl run -itq --restart=Never --rm --image curlimages/curl curl --"
 # Send curl command to get supported languages. Expected output: [{"name":"Arabic", ...}]
-$KURL $LT_POD_IP:8010/v2/languages
+kubectl run -itq --restart=Never --rm --image curlimages/curl curl -- $LT_POD_IP:8010/v2/languages
 # Send curl command to correct a tiny sentence.
-$KURL $LT_POD_IP:8010/v2/check -d text="Its fine." -d language=en-US
+kubectl run -itq --restart=Never --rm --image curlimages/curl curl -- $LT_POD_IP:8010/v2/check -d text="Its fine." -d language=en-US
 ```
 
 Expected output (abbreviated):
